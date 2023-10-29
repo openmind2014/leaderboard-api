@@ -47,8 +47,8 @@ The API provides the following routes:
     "address": "Vancouver"
   }
   ```
-- `GET /api/v1/users/{user}` - Retrieve a specific user by ID.
-- `PUT /api/v1/users/{user}` - Update a user's points (increment or decrement).
+- `GET /api/v1/users/{userId}` - Retrieve a specific user by ID.
+- `PUT /api/v1/users/{userId}` - Update a user's points (increment or decrement).
   - The update operation depends on the `action` parameter in the request.
   - If 'action' is 'dec' and the user has more than 0 points, it decreases the points by 1.
   - If 'action' is 'inc', it increases the user's points by 1.
@@ -59,7 +59,7 @@ The API provides the following routes:
     "action": "inc"
   }
   ```
-- `DELETE /api/v1/users/{user}` - Delete a user.
+- `DELETE /api/v1/users/{userId}` - Delete a user.
 - `GET /api/v1/stats/users` - Retrieve statistics about users, grouped by points, and their average age.
 
 
