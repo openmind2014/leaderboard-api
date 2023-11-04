@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Jobs\GenerateQRCodeJob;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::orderByDesc('points')->get();
+        return User::orderByDesc('points')->paginate();
     }
 
     /**
@@ -53,8 +54,13 @@ class UserController extends Controller
         } else if ($request->action === 'inc') {
             $user->points += 1;
         }
-        $user->save();
-        return User::orderByDesc('points')->get();
+
+        try {
+            $user->save();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['message' => 'Unable to update user points'], 500);
+        }
     }
 
     /**
@@ -62,8 +68,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return response()->noContent();
+        try {
+            $user->delete();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['message' => 'Unable to delete user'], 500);
+        }
     }
 
     /**
