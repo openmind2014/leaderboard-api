@@ -3,7 +3,7 @@
 This is a PHP-based RESTful API for managing user data, including creating, updating, deleting, and retrieving user information. It also provides additional functionality for statistical data and background job processing.
 
 ## Author
-- **Name**: Jun Chen
+- **Name**: Jun
 - **Email**: juncwork@gmail.com
 
 ## Table of Contents
